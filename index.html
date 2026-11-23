@@ -159,6 +159,13 @@
   .ownbar button{font:inherit;font-size:12px;background:none;border:1px solid var(--line);color:var(--ink-2);border-radius:999px;padding:4px 10px;cursor:pointer}
   .ftl{cursor:default}
 
+
+  .navr{display:flex;align-items:center;gap:24px}
+  .navli{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-2);padding:6px 12px;border:1px solid var(--line);border-radius:8px;transition:all .2s}
+  .navli:hover{color:var(--ink);border-color:var(--a1);box-shadow:0 0 14px rgba(122,162,255,.2)}
+  footer a{color:var(--ink-3);transition:color .15s}
+  footer a:hover{color:var(--a1)}
+
   .rv{opacity:0;transform:translateY(14px);transition:opacity .8s ease,transform .8s ease}
   .rv.in{opacity:1;transform:none}
 
@@ -181,7 +188,7 @@
 
 <nav id="nav"><div class="wrap nav">
   <a href="#top" class="brand"><i></i>sid.dev</a>
-  <div class="links"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></div>
+  <div class="navr"><div class="links"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></div><a class="navli" href="https://www.linkedin.com/in/sid-dev-751323109/" target="_blank" rel="noopener" aria-label="Sid Dev on LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg><span>LinkedIn</span></a></div>
 </div></nav>
 
 <!-- ===== Page 1: general information ===== -->
@@ -284,7 +291,7 @@
   <div class="cta rv"><a class="btn p" href="https://www.linkedin.com/in/sid-dev-751323109/" target="_blank" rel="noopener">Connect on LinkedIn ↗</a></div>
 </div></section>
 
-<div class="wrap"><footer><span class="mono">© 2026 SID DEV · KOCHI</span><span class="mono">BUILT WITH CARE + AI</span></footer></div>
+<div class="wrap"><footer><span class="mono">© 2026 SID DEV · KOCHI</span><a class="mono" href="https://www.linkedin.com/in/sid-dev-751323109/" target="_blank" rel="noopener">LINKEDIN ↗</a></footer></div>
 
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Media viewer">
   <button class="x" aria-label="Close">✕</button><button class="pv" aria-label="Previous">‹</button><button class="nx" aria-label="Next">›</button>

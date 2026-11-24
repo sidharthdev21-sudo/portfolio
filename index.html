@@ -376,7 +376,7 @@
   <div class="media vblock" data-p="pm-videos" data-only="video" hidden>
     <div class="vh"><div><span class="mono">VIDEOS</span><h3>Product management, explained</h3></div>
       <div class="vnav"><button type="button" class="vbtn" data-d="-1" aria-label="Scroll videos left">‹</button><button type="button" class="vbtn" data-d="1" aria-label="Scroll videos right">›</button></div></div>
-    <input type="text" class="vtitle" maxlength="140" placeholder="Title for the next video you upload (optional)" hidden>
+    <input type="text" class="vtitle" maxlength="140" placeholder="Title (optional, uses the file name if left blank)" hidden>
     <div class="mgrid reels" tabindex="0" aria-label="Product management videos"></div>
     <p class="mnote mono"></p>
   </div>
@@ -603,6 +603,11 @@ document.querySelectorAll('.rv').forEach((e,i)=>{e.style.transitionDelay=(e.clos
       if(f.size>MAX){bad.push(f.name+' (over 50 MB)');return false}
       return true});
     const vt=b.querySelector('.vtitle'); const title=vt&&vt.value.trim()?vt.value.trim().slice(0,140):null;
+    const fromName=f=>f.name.replace(/\.[^.]+$/,'').replace(/[_-]+/g,' ').replace(/\s+/g,' ').trim().slice(0,140)||null;
+    const titleFor=f=>{
+      if(title) return good.length===1?title:title+' ('+(good.indexOf(f)+1)+')';
+      return f.type.startsWith('video/')?fromName(f):null;
+    };
     pending[p]=(pending[p]||0)+good.length; render();
     for(const f of good){
       const ext=(f.name.split('.').pop()||'bin').toLowerCase().replace(/[^a-z0-9]/g,'').slice(0,5)||'bin';
@@ -610,7 +615,7 @@ document.querySelectorAll('.rv').forEach((e,i)=>{e.style.transitionDelay=(e.clos
       const up=await sb.storage.from(BUCKET).upload(path,f,{contentType:f.type,cacheControl:'31536000',upsert:false});
       if(up.error){bad.push(f.name+' (upload failed)');}
       else{
-        const ins=await sb.from('portfolio_media').insert({project:p,path,kind:f.type.startsWith('video')?'video':'image',title:good.length===1?title:(title?title+' ('+(good.indexOf(f)+1)+')':null)});
+        const ins=await sb.from('portfolio_media').insert({project:p,path,kind:f.type.startsWith('video')?'video':'image',title:titleFor(f)});
         if(ins.error){bad.push(f.name+' (could not save)'); await sb.storage.from(BUCKET).remove([path]);}
       }
       pending[p]--; await load();

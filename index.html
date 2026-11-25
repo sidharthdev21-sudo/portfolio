@@ -228,7 +228,7 @@
   .mgrid.reels{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
   .mgrid.reels:focus{outline:none}
   .mgrid.reels>*{flex:0 0 clamp(170px,22vw,220px);min-width:0;aspect-ratio:9/16;scroll-snap-align:start;border-radius:12px}
-  .reel .cap{position:absolute;left:0;right:0;bottom:0;padding:36px 12px 12px;background:linear-gradient(transparent,rgba(4,5,7,.92));font-size:13px;font-weight:500;line-height:1.35;text-align:left;pointer-events:none}
+  .tile .cap,.reel .cap{position:absolute;left:0;right:0;bottom:0;padding:36px 12px 12px;background:linear-gradient(transparent,rgba(4,5,7,.92));font-size:13px;font-weight:500;line-height:1.35;text-align:left;pointer-events:none}
   .reel .vi{top:10px;right:10px}
   .reel::after{content:"";position:absolute;inset:0;border-radius:12px;border:1px solid transparent;background:var(--holo) border-box;-webkit-mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .3s;pointer-events:none}
   .reel:hover::after{opacity:1}
@@ -373,11 +373,11 @@
     </div>
   </div>
 
-  <div class="media vblock" data-p="pm-videos" data-only="video" hidden>
-    <div class="vh"><div><span class="mono">VIDEOS</span><h3>Product management, explained</h3></div>
+  <div class="media vblock" data-p="pm-videos" hidden>
+    <div class="vh"><div><span class="mono">PHOTOS &amp; VIDEOS</span><h3>Product management, explained</h3></div>
       <div class="vnav"><button type="button" class="vbtn" data-d="-1" aria-label="Scroll videos left">‹</button><button type="button" class="vbtn" data-d="1" aria-label="Scroll videos right">›</button></div></div>
-    <input type="text" class="vtitle" maxlength="140" placeholder="Title (optional, uses the file name if left blank)" hidden>
-    <div class="mgrid reels" tabindex="0" aria-label="Product management videos"></div>
+    <input type="text" class="vtitle" maxlength="140" placeholder="Title (optional; videos use the file name if left blank)" hidden>
+    <div class="mgrid reels" tabindex="0" aria-label="Product management photos and videos"></div>
     <p class="mnote mono"></p>
   </div>
 </div></section>
@@ -544,7 +544,8 @@ document.querySelectorAll('.rv').forEach((e,i)=>{e.style.transitionDelay=(e.clos
         }else{
           const im=document.createElement('img'); im.loading='lazy'; im.alt=''; im.src=pub(m.path); t.append(im);
         }
-        if(m.title){
+        if(m.title&&m.kind!=='video'){const c=document.createElement('div');c.className='cap';c.textContent=m.title;t.append(c)}
+        else if(m.title){
           t.classList.add('titled');
           const th=document.createElement('div'); th.className='thumb';
           const k=document.createElement('span'); k.className='tk'; k.textContent=m.kind==='video'?'VIDEO':'IMAGE';

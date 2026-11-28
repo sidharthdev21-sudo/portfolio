@@ -377,6 +377,12 @@
   #professional .st{color:var(--a2)}
   #professional{border-top:1px solid var(--line)}
 
+
+  /* tighter gap between project sections */
+  #work{padding-bottom:36px}
+  #professional{padding-top:36px;border-top:0}
+  @media(max-width:760px){#work{padding-bottom:24px}#professional{padding-top:24px}}
+
   .rv{opacity:0;transform:translateY(14px);transition:opacity .8s ease,transform .8s ease}
   .rv.in{opacity:1;transform:none}
 
